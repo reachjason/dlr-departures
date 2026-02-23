@@ -1,11 +1,13 @@
 import { useDepartures } from './hooks/useDepartures';
 import { useBikePoints } from './hooks/useBikePoints';
 import { useRiverBus } from './hooks/useRiverBus';
+import { useSunTide } from './hooks/useSunTide';
 import { DepartureBoard } from './components/DepartureBoard';
 import { LoadingSkeleton } from './components/LoadingSkeleton';
 import { StatusBar } from './components/StatusBar';
 import { BikePointPanel } from './components/BikePointPanel';
 import { RiverBusPanel } from './components/RiverBusPanel';
+import { SunTidePanel } from './components/SunTidePanel';
 import styles from './App.module.css';
 
 export default function App() {
@@ -13,6 +15,7 @@ export default function App() {
     useDepartures();
   const { bikePoints, bikeLoading, bikeError } = useBikePoints();
   const { riverBus, riverBusLoading, riverBusError } = useRiverBus();
+  const { sunTide, sunTideLoading, sunTideError } = useSunTide();
 
   return (
     <div className={styles.page}>
@@ -42,6 +45,12 @@ export default function App() {
           riverBus={riverBus}
           riverBusLoading={riverBusLoading}
           riverBusError={riverBusError}
+        />
+
+        <SunTidePanel
+          sunTide={sunTide}
+          sunTideLoading={sunTideLoading}
+          sunTideError={sunTideError}
         />
 
         <BikePointPanel
