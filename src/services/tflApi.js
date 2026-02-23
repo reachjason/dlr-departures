@@ -1,5 +1,6 @@
 const BASE_URL = 'https://api.tfl.gov.uk';
 const ISLAND_GARDENS_STOP_ID = '940GZZDLISL';
+const MASTHOUSE_TERRACE_PIER_ID = '930GMHT';
 
 const BIKE_POINTS = [
   { id: 'BikePoints_454', name: 'Napier Avenue, Millwall' },
@@ -49,4 +50,28 @@ export async function fetchBikePoints() {
     })
   );
   return results;
+}
+
+export async function fetchRiverBus() {
+  const url = `${BASE_URL}/StopPoint/${MASTHOUSE_TERRACE_PIER_ID}/Arrivals`;
+
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(`TfL API error: ${response.status} ${response.statusText}`);
+  }
+
+  const arrivals = await response.json();
+
+  return arrivals
+    .filter((a) => a.modeName === 'river-bus')
+    .sort((a, b) => a.timeToStation - b.timeToStation)
+    .map((a) => ({
+      id: a.id,
+      line: a.lineName,
+      destination: a.destinationName,
+      timeToStation: a.timeToStation,
+      expectedArrival: a.expectedArrival,
+      direction: a.direction,
+    }));
 }

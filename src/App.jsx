@@ -1,15 +1,18 @@
 import { useDepartures } from './hooks/useDepartures';
 import { useBikePoints } from './hooks/useBikePoints';
+import { useRiverBus } from './hooks/useRiverBus';
 import { DepartureBoard } from './components/DepartureBoard';
 import { LoadingSkeleton } from './components/LoadingSkeleton';
 import { StatusBar } from './components/StatusBar';
 import { BikePointPanel } from './components/BikePointPanel';
+import { RiverBusPanel } from './components/RiverBusPanel';
 import styles from './App.module.css';
 
 export default function App() {
   const { departures, loading, error, lastUpdated, countdown, refresh } =
     useDepartures();
   const { bikePoints, bikeLoading, bikeError } = useBikePoints();
+  const { riverBus, riverBusLoading, riverBusError } = useRiverBus();
 
   return (
     <div className={styles.page}>
@@ -34,6 +37,12 @@ export default function App() {
         ) : (
           <DepartureBoard departures={departures} />
         )}
+
+        <RiverBusPanel
+          riverBus={riverBus}
+          riverBusLoading={riverBusLoading}
+          riverBusError={riverBusError}
+        />
 
         <BikePointPanel
           bikePoints={bikePoints}
