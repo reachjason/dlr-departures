@@ -1,6 +1,11 @@
 const BASE_URL = 'https://api.tfl.gov.uk';
 const ISLAND_GARDENS_STOP_ID = '940GZZDLISL';
 
+const BIKE_POINTS = [
+  { id: 'BikePoints_454', name: 'Napier Avenue, Millwall' },
+  { id: 'BikePoints_481', name: 'Saunders Ness Road, Cubitt Town' },
+];
+
 export async function fetchDepartures() {
   const url = `${BASE_URL}/StopPoint/${ISLAND_GARDENS_STOP_ID}/Arrivals`;
 
@@ -25,4 +30,23 @@ export async function fetchDepartures() {
       currentLocation: a.currentLocation,
       towards: a.towards,
     }));
+}
+
+export async function fetchBikePoints() {
+  const results = await Promise.all(
+    BIKE_POINTS.map(async ({ id, name }) => {
+      const res = await fetch(`${BASE_URL}/BikePoint/${id}`);
+      if (!res.ok) throw new Error(`TfL API error: ${res.status}`);
+      const data = await res.json();
+      const prop = (key) =>
+        data.additionalProperties.find((p) => p.key === key)?.value;
+      return {
+        id,
+        name,
+        standardBikes: Number(prop('NbStandardBikes')),
+        emptyDocks: Number(prop('NbEmptyDocks')),
+      };
+    })
+  );
+  return results;
 }

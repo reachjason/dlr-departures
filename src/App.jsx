@@ -1,12 +1,15 @@
 import { useDepartures } from './hooks/useDepartures';
+import { useBikePoints } from './hooks/useBikePoints';
 import { DepartureBoard } from './components/DepartureBoard';
 import { LoadingSkeleton } from './components/LoadingSkeleton';
 import { StatusBar } from './components/StatusBar';
+import { BikePointPanel } from './components/BikePointPanel';
 import styles from './App.module.css';
 
 export default function App() {
   const { departures, loading, error, lastUpdated, countdown, refresh } =
     useDepartures();
+  const { bikePoints, bikeLoading, bikeError } = useBikePoints();
 
   return (
     <div className={styles.page}>
@@ -31,6 +34,12 @@ export default function App() {
         ) : (
           <DepartureBoard departures={departures} />
         )}
+
+        <BikePointPanel
+          bikePoints={bikePoints}
+          bikeLoading={bikeLoading}
+          bikeError={bikeError}
+        />
 
         <StatusBar
           lastUpdated={lastUpdated}
