@@ -1,5 +1,7 @@
 .section {
-  margin-top: 8px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #1e3a1e;
 }
 
 .heading {
@@ -50,6 +52,18 @@
   font-weight: 700;
   color: #e8f5e9;
   line-height: 1;
+}
+
+.statValueGreen {
+  color: #69f0ae;
+}
+
+.statValueAmber {
+  color: #ffab40;
+}
+
+.statValueRed {
+  color: #ff5252;
 }
 
 .statLabel {

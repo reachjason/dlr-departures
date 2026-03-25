@@ -18,21 +18,21 @@ export function SunTidePanel({ sunTide, sunTideLoading, sunTideError }) {
             <div className={styles.stats}>
               <div className={styles.stat}>
                 <span className={styles.statValue}>
-                  <span className={styles.arrow}>{'\u2191'}</span> {sunTide.sun.sunrise}
+                  <span className={styles.arrow}>{'\u2600\uFE0F'}</span> {sunTide.sun.sunrise}
                 </span>
                 <span className={styles.statLabel}>sunrise</span>
               </div>
               <div className={styles.divider} />
               <div className={styles.stat}>
                 <span className={styles.statValue}>
-                  <span className={styles.arrow}>{'\u2193'}</span> {sunTide.sun.sunset}
+                  <span className={styles.arrow}>{'\uD83C\uDF19'}</span> {sunTide.sun.sunset}
                 </span>
                 <span className={styles.statLabel}>sunset</span>
               </div>
             </div>
           </div>
 
-          <div className={styles.card}>
+          <div className={styles.cardWide}>
             <p className={styles.cardName}>Thames Tide</p>
             {sunTide.tide.high.length === 0 && sunTide.tide.low.length === 0 ? (
               <p className={styles.noData}>No data yet</p>

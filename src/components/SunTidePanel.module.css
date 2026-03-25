@@ -1,5 +1,7 @@
 .section {
-  margin-top: 8px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #1e3a1e;
 }
 
 .heading {
@@ -19,6 +21,11 @@
 
 .card {
   flex: 1;
+  min-width: 200px;
+}
+
+.cardWide {
+  flex: 2;
   min-width: 200px;
   background: #0d1f0d;
   border: 1px solid #1e3a1e;

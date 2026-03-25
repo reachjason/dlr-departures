@@ -12,7 +12,7 @@ function getUrgencyClass(seconds) {
   return '';
 }
 
-export function DepartureRow({ departure, index }) {
+export function DepartureRow({ departure, index, showLocation }) {
   const mins = formatTime(departure.timeToStation);
   const urgency = getUrgencyClass(departure.timeToStation);
 
@@ -20,7 +20,7 @@ export function DepartureRow({ departure, index }) {
     <tr className={`${styles.row} ${index % 2 === 0 ? styles.even : ''}`}>
       <td className={styles.destination}>{departure.destination}</td>
       <td className={styles.platform}>{departure.platform || '—'}</td>
-      <td className={styles.location}>{departure.currentLocation || '—'}</td>
+      {showLocation && <td className={styles.location}>{departure.currentLocation || '—'}</td>}
       <td className={`${styles.time} ${urgency}`}>{mins}</td>
     </tr>
   );

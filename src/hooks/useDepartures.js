@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { fetchDepartures } from '../services/tflApi';
 
-const REFRESH_INTERVAL = 30; // seconds
+const REFRESH_INTERVAL = 60; // seconds
 
 export function useDepartures() {
   const [departures, setDepartures] = useState([]);

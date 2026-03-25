@@ -1,5 +1,7 @@
 .section {
-  margin-top: 8px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #1e3a1e;
 }
 
 .heading {

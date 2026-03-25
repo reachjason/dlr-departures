@@ -10,6 +10,8 @@ export function DepartureBoard({ departures }) {
     );
   }
 
+  const hasLocation = departures.some((d) => d.currentLocation);
+
   return (
     <div className={styles.wrapper}>
       <table className={styles.table}>
@@ -17,13 +19,13 @@ export function DepartureBoard({ departures }) {
           <tr className={styles.header}>
             <th>Destination</th>
             <th>Platform</th>
-            <th>Current Location</th>
+            {hasLocation && <th>Current Location</th>}
             <th>Departs</th>
           </tr>
         </thead>
         <tbody>
           {departures.map((d, i) => (
-            <DepartureRow key={d.id} departure={d} index={i} />
+            <DepartureRow key={d.id} departure={d} index={i} showLocation={hasLocation} />
           ))}
         </tbody>
       </table>

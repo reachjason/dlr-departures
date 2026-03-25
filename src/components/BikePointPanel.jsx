@@ -1,5 +1,11 @@
 import styles from './BikePointPanel.module.css';
 
+function availabilityClass(count) {
+  if (count <= 1) return styles.statValueRed;
+  if (count <= 5) return styles.statValueAmber;
+  return styles.statValueGreen;
+}
+
 export function BikePointPanel({ bikePoints, bikeLoading, bikeError }) {
   return (
     <section className={styles.section}>
@@ -18,12 +24,12 @@ export function BikePointPanel({ bikePoints, bikeLoading, bikeError }) {
               <p className={styles.cardName}>{point.name}</p>
               <div className={styles.stats}>
                 <div className={styles.stat}>
-                  <span className={styles.statValue}>{point.standardBikes}</span>
+                  <span className={`${styles.statValue} ${availabilityClass(point.standardBikes)}`}>{point.standardBikes}</span>
                   <span className={styles.statLabel}>bikes</span>
                 </div>
                 <div className={styles.divider} />
                 <div className={styles.stat}>
-                  <span className={styles.statValue}>{point.emptyDocks}</span>
+                  <span className={`${styles.statValue} ${availabilityClass(point.emptyDocks)}`}>{point.emptyDocks}</span>
                   <span className={styles.statLabel}>free docks</span>
                 </div>
               </div>
